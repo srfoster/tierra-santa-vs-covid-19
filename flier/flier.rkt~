@@ -1,0 +1,29 @@
+#lang racket
+
+(require 2htdp/image)
+
+(define (qr)
+  (bitmap/file "../qr/qrcode.png"))
+
+(define (link)
+  (text/font 
+    "https://bit.ly/39GMSaY"
+    50 "blue"
+    #f 'roman 'normal 'normal #t))
+
+(define (bg)
+  (rectangle 500 500 'solid 'red))
+
+(define (full)
+  (overlay
+    (bg)
+    (above
+      (text "Tierrasanta vs COVID-19" 100 'black)
+      (qr)	
+      (empty-scene 0 20)
+      (link)) 
+    ))
+
+(save-image 
+  (full)
+  "flier.png")
